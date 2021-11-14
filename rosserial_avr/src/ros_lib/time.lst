@@ -1,0 +1,549 @@
+   1               		.file	"time.cpp"
+   2               	__SP_H__ = 0x3e
+   3               	__SP_L__ = 0x3d
+   4               	__SREG__ = 0x3f
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.text
+   8               	.Ltext0:
+   9               		.cfi_sections	.debug_frame
+  10               	.global	_ZN3ros16normalizeSecNSecERmS0_
+  12               	_ZN3ros16normalizeSecNSecERmS0_:
+  13               	.LFB19:
+  14               		.file 1 "ros_lib/time.cpp"
+   1:ros_lib/time.cpp **** /*
+   2:ros_lib/time.cpp ****  * Software License Agreement (BSD License)
+   3:ros_lib/time.cpp ****  *
+   4:ros_lib/time.cpp ****  * Copyright (c) 2011, Willow Garage, Inc.
+   5:ros_lib/time.cpp ****  * All rights reserved.
+   6:ros_lib/time.cpp ****  *
+   7:ros_lib/time.cpp ****  * Redistribution and use in source and binary forms, with or without
+   8:ros_lib/time.cpp ****  * modification, are permitted provided that the following conditions
+   9:ros_lib/time.cpp ****  * are met:
+  10:ros_lib/time.cpp ****  *
+  11:ros_lib/time.cpp ****  *  * Redistributions of source code must retain the above copyright
+  12:ros_lib/time.cpp ****  *    notice, this list of conditions and the following disclaimer.
+  13:ros_lib/time.cpp ****  *  * Redistributions in binary form must reproduce the above
+  14:ros_lib/time.cpp ****  *    copyright notice, this list of conditions and the following
+  15:ros_lib/time.cpp ****  *    disclaimer in the documentation and/or other materials provided
+  16:ros_lib/time.cpp ****  *    with the distribution.
+  17:ros_lib/time.cpp ****  *  * Neither the name of Willow Garage, Inc. nor the names of its
+  18:ros_lib/time.cpp ****  *    contributors may be used to endorse or promote prducts derived
+  19:ros_lib/time.cpp ****  *    from this software without specific prior written permission.
+  20:ros_lib/time.cpp ****  *
+  21:ros_lib/time.cpp ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  22:ros_lib/time.cpp ****  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  23:ros_lib/time.cpp ****  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+  24:ros_lib/time.cpp ****  * FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+  25:ros_lib/time.cpp ****  * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+  26:ros_lib/time.cpp ****  * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+  27:ros_lib/time.cpp ****  * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+  28:ros_lib/time.cpp ****  * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+  29:ros_lib/time.cpp ****  * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+  30:ros_lib/time.cpp ****  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+  31:ros_lib/time.cpp ****  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  32:ros_lib/time.cpp ****  * POSSIBILITY OF SUCH DAMAGE.
+  33:ros_lib/time.cpp ****  */
+  34:ros_lib/time.cpp **** 
+  35:ros_lib/time.cpp **** #include "ros/time.h"
+  36:ros_lib/time.cpp **** 
+  37:ros_lib/time.cpp **** namespace ros
+  38:ros_lib/time.cpp **** {
+  39:ros_lib/time.cpp **** void normalizeSecNSec(uint32_t& sec, uint32_t& nsec)
+  40:ros_lib/time.cpp **** {
+  15               		.loc 1 40 0
+  16               		.cfi_startproc
+  17               	.LVL0:
+  18 0000 CF92      		push r12
+  19               	.LCFI0:
+  20               		.cfi_def_cfa_offset 3
+  21               		.cfi_offset 12, -2
+  22 0002 DF92      		push r13
+  23               	.LCFI1:
+  24               		.cfi_def_cfa_offset 4
+  25               		.cfi_offset 13, -3
+  26 0004 EF92      		push r14
+  27               	.LCFI2:
+  28               		.cfi_def_cfa_offset 5
+  29               		.cfi_offset 14, -4
+  30 0006 FF92      		push r15
+  31               	.LCFI3:
+  32               		.cfi_def_cfa_offset 6
+  33               		.cfi_offset 15, -5
+  34 0008 0F93      		push r16
+  35               	.LCFI4:
+  36               		.cfi_def_cfa_offset 7
+  37               		.cfi_offset 16, -6
+  38 000a 1F93      		push r17
+  39               	.LCFI5:
+  40               		.cfi_def_cfa_offset 8
+  41               		.cfi_offset 17, -7
+  42 000c CF93      		push r28
+  43               	.LCFI6:
+  44               		.cfi_def_cfa_offset 9
+  45               		.cfi_offset 28, -8
+  46 000e DF93      		push r29
+  47               	.LCFI7:
+  48               		.cfi_def_cfa_offset 10
+  49               		.cfi_offset 29, -9
+  50               	/* prologue: function */
+  51               	/* frame size = 0 */
+  52               	/* stack size = 8 */
+  53               	.L__stack_usage = 8
+  54 0010 8C01      		movw r16,r24
+  55 0012 EB01      		movw r28,r22
+  41:ros_lib/time.cpp ****   uint32_t nsec_part = nsec % 1000000000UL;
+  56               		.loc 1 41 0
+  57 0014 6881      		ld r22,Y
+  58 0016 7981      		ldd r23,Y+1
+  59 0018 8A81      		ldd r24,Y+2
+  60 001a 9B81      		ldd r25,Y+3
+  61               	.LVL1:
+  42:ros_lib/time.cpp ****   uint32_t sec_part = nsec / 1000000000UL;
+  43:ros_lib/time.cpp ****   sec += sec_part;
+  62               		.loc 1 43 0
+  63 001c 20E0      		ldi r18,0
+  64 001e 3AEC      		ldi r19,lo8(-54)
+  65 0020 4AE9      		ldi r20,lo8(-102)
+  66 0022 5BE3      		ldi r21,lo8(59)
+  67 0024 0E94 0000 		call __udivmodsi4
+  68               	.LVL2:
+  69 0028 F801      		movw r30,r16
+  70 002a C080      		ld r12,Z
+  71 002c D180      		ldd r13,Z+1
+  72 002e E280      		ldd r14,Z+2
+  73 0030 F380      		ldd r15,Z+3
+  74 0032 C20E      		add r12,r18
+  75 0034 D31E      		adc r13,r19
+  76 0036 E41E      		adc r14,r20
+  77 0038 F51E      		adc r15,r21
+  78 003a C082      		st Z,r12
+  79 003c D182      		std Z+1,r13
+  80 003e E282      		std Z+2,r14
+  81 0040 F382      		std Z+3,r15
+  44:ros_lib/time.cpp ****   nsec = nsec_part;
+  82               		.loc 1 44 0
+  83 0042 6883      		st Y,r22
+  84 0044 7983      		std Y+1,r23
+  85 0046 8A83      		std Y+2,r24
+  86 0048 9B83      		std Y+3,r25
+  87               	/* epilogue start */
+  45:ros_lib/time.cpp **** }
+  88               		.loc 1 45 0
+  89 004a DF91      		pop r29
+  90 004c CF91      		pop r28
+  91               	.LVL3:
+  92 004e 1F91      		pop r17
+  93 0050 0F91      		pop r16
+  94 0052 FF90      		pop r15
+  95 0054 EF90      		pop r14
+  96 0056 DF90      		pop r13
+  97 0058 CF90      		pop r12
+  98 005a 0895      		ret
+  99               		.cfi_endproc
+ 100               	.LFE19:
+ 102               	.global	_ZN3ros4Time8fromNSecEl
+ 104               	_ZN3ros4Time8fromNSecEl:
+ 105               	.LFB20:
+  46:ros_lib/time.cpp **** 
+  47:ros_lib/time.cpp **** Time& Time::fromNSec(int32_t t)
+  48:ros_lib/time.cpp **** {
+ 106               		.loc 1 48 0
+ 107               		.cfi_startproc
+ 108               	.LVL4:
+ 109 005c CF93      		push r28
+ 110               	.LCFI8:
+ 111               		.cfi_def_cfa_offset 3
+ 112               		.cfi_offset 28, -2
+ 113 005e DF93      		push r29
+ 114               	.LCFI9:
+ 115               		.cfi_def_cfa_offset 4
+ 116               		.cfi_offset 29, -3
+ 117               	/* prologue: function */
+ 118               	/* frame size = 0 */
+ 119               	/* stack size = 2 */
+ 120               	.L__stack_usage = 2
+ 121 0060 EC01      		movw r28,r24
+  49:ros_lib/time.cpp ****   sec = t / 1000000000;
+ 122               		.loc 1 49 0
+ 123 0062 CB01      		movw r24,r22
+ 124 0064 BA01      		movw r22,r20
+ 125 0066 20E0      		ldi r18,0
+ 126 0068 3AEC      		ldi r19,lo8(-54)
+ 127 006a 4AE9      		ldi r20,lo8(-102)
+ 128 006c 5BE3      		ldi r21,lo8(59)
+ 129 006e 0E94 0000 		call __divmodsi4
+ 130 0072 2883      		st Y,r18
+ 131 0074 3983      		std Y+1,r19
+ 132 0076 4A83      		std Y+2,r20
+ 133 0078 5B83      		std Y+3,r21
+  50:ros_lib/time.cpp ****   nsec = t % 1000000000;
+ 134               		.loc 1 50 0
+ 135 007a 6C83      		std Y+4,r22
+ 136 007c 7D83      		std Y+5,r23
+ 137 007e 8E83      		std Y+6,r24
+ 138 0080 9F83      		std Y+7,r25
+  51:ros_lib/time.cpp ****   normalizeSecNSec(sec, nsec);
+ 139               		.loc 1 51 0
+ 140 0082 BE01      		movw r22,r28
+ 141 0084 6C5F      		subi r22,-4
+ 142 0086 7F4F      		sbci r23,-1
+ 143 0088 CE01      		movw r24,r28
+ 144 008a 0E94 0000 		call _ZN3ros16normalizeSecNSecERmS0_
+ 145               	.LVL5:
+  52:ros_lib/time.cpp ****   return *this;
+  53:ros_lib/time.cpp **** }
+ 146               		.loc 1 53 0
+ 147 008e CE01      		movw r24,r28
+ 148               	/* epilogue start */
+ 149 0090 DF91      		pop r29
+ 150 0092 CF91      		pop r28
+ 151               	.LVL6:
+ 152 0094 0895      		ret
+ 153               		.cfi_endproc
+ 154               	.LFE20:
+ 156               	.global	_ZN3ros4TimepLERKNS_8DurationE
+ 158               	_ZN3ros4TimepLERKNS_8DurationE:
+ 159               	.LFB21:
+  54:ros_lib/time.cpp **** 
+  55:ros_lib/time.cpp **** Time& Time::operator +=(const Duration &rhs)
+  56:ros_lib/time.cpp **** {
+ 160               		.loc 1 56 0
+ 161               		.cfi_startproc
+ 162               	.LVL7:
+ 163 0096 0F93      		push r16
+ 164               	.LCFI10:
+ 165               		.cfi_def_cfa_offset 3
+ 166               		.cfi_offset 16, -2
+ 167 0098 1F93      		push r17
+ 168               	.LCFI11:
+ 169               		.cfi_def_cfa_offset 4
+ 170               		.cfi_offset 17, -3
+ 171 009a CF93      		push r28
+ 172               	.LCFI12:
+ 173               		.cfi_def_cfa_offset 5
+ 174               		.cfi_offset 28, -4
+ 175 009c DF93      		push r29
+ 176               	.LCFI13:
+ 177               		.cfi_def_cfa_offset 6
+ 178               		.cfi_offset 29, -5
+ 179               	/* prologue: function */
+ 180               	/* frame size = 0 */
+ 181               	/* stack size = 4 */
+ 182               	.L__stack_usage = 4
+ 183 009e EC01      		movw r28,r24
+  57:ros_lib/time.cpp ****   sec = sec - 1 + rhs.sec;
+ 184               		.loc 1 57 0
+ 185 00a0 8881      		ld r24,Y
+ 186 00a2 9981      		ldd r25,Y+1
+ 187 00a4 AA81      		ldd r26,Y+2
+ 188 00a6 BB81      		ldd r27,Y+3
+ 189               	.LVL8:
+ 190 00a8 0197      		sbiw r24,1
+ 191 00aa A109      		sbc r26,__zero_reg__
+ 192 00ac B109      		sbc r27,__zero_reg__
+ 193 00ae FB01      		movw r30,r22
+ 194 00b0 0081      		ld r16,Z
+ 195 00b2 1181      		ldd r17,Z+1
+ 196 00b4 2281      		ldd r18,Z+2
+ 197 00b6 3381      		ldd r19,Z+3
+ 198 00b8 800F      		add r24,r16
+ 199 00ba 911F      		adc r25,r17
+ 200 00bc A21F      		adc r26,r18
+ 201 00be B31F      		adc r27,r19
+ 202 00c0 8883      		st Y,r24
+ 203 00c2 9983      		std Y+1,r25
+ 204 00c4 AA83      		std Y+2,r26
+ 205 00c6 BB83      		std Y+3,r27
+  58:ros_lib/time.cpp ****   nsec = nsec + 1000000000UL + rhs.nsec;
+ 206               		.loc 1 58 0
+ 207 00c8 8C81      		ldd r24,Y+4
+ 208 00ca 9D81      		ldd r25,Y+5
+ 209 00cc AE81      		ldd r26,Y+6
+ 210 00ce BF81      		ldd r27,Y+7
+ 211 00d0 9653      		subi r25,54
+ 212 00d2 A546      		sbci r26,101
+ 213 00d4 B44C      		sbci r27,-60
+ 214 00d6 4481      		ldd r20,Z+4
+ 215 00d8 5581      		ldd r21,Z+5
+ 216 00da 6681      		ldd r22,Z+6
+ 217 00dc 7781      		ldd r23,Z+7
+ 218 00de 840F      		add r24,r20
+ 219 00e0 951F      		adc r25,r21
+ 220 00e2 A61F      		adc r26,r22
+ 221 00e4 B71F      		adc r27,r23
+ 222 00e6 8C83      		std Y+4,r24
+ 223 00e8 9D83      		std Y+5,r25
+ 224 00ea AE83      		std Y+6,r26
+ 225 00ec BF83      		std Y+7,r27
+  59:ros_lib/time.cpp ****   normalizeSecNSec(sec, nsec);
+ 226               		.loc 1 59 0
+ 227 00ee BE01      		movw r22,r28
+ 228               	.LVL9:
+ 229 00f0 6C5F      		subi r22,-4
+ 230 00f2 7F4F      		sbci r23,-1
+ 231 00f4 CE01      		movw r24,r28
+ 232 00f6 0E94 0000 		call _ZN3ros16normalizeSecNSecERmS0_
+ 233               	.LVL10:
+  60:ros_lib/time.cpp ****   return *this;
+  61:ros_lib/time.cpp **** }
+ 234               		.loc 1 61 0
+ 235 00fa CE01      		movw r24,r28
+ 236               	/* epilogue start */
+ 237 00fc DF91      		pop r29
+ 238 00fe CF91      		pop r28
+ 239               	.LVL11:
+ 240 0100 1F91      		pop r17
+ 241 0102 0F91      		pop r16
+ 242 0104 0895      		ret
+ 243               		.cfi_endproc
+ 244               	.LFE21:
+ 246               	.global	_ZN3ros4TimemIERKNS_8DurationE
+ 248               	_ZN3ros4TimemIERKNS_8DurationE:
+ 249               	.LFB22:
+  62:ros_lib/time.cpp **** 
+  63:ros_lib/time.cpp **** Time& Time::operator -=(const Duration &rhs){
+ 250               		.loc 1 63 0
+ 251               		.cfi_startproc
+ 252               	.LVL12:
+ 253 0106 0F93      		push r16
+ 254               	.LCFI14:
+ 255               		.cfi_def_cfa_offset 3
+ 256               		.cfi_offset 16, -2
+ 257 0108 1F93      		push r17
+ 258               	.LCFI15:
+ 259               		.cfi_def_cfa_offset 4
+ 260               		.cfi_offset 17, -3
+ 261 010a CF93      		push r28
+ 262               	.LCFI16:
+ 263               		.cfi_def_cfa_offset 5
+ 264               		.cfi_offset 28, -4
+ 265 010c DF93      		push r29
+ 266               	.LCFI17:
+ 267               		.cfi_def_cfa_offset 6
+ 268               		.cfi_offset 29, -5
+ 269               	/* prologue: function */
+ 270               	/* frame size = 0 */
+ 271               	/* stack size = 4 */
+ 272               	.L__stack_usage = 4
+ 273 010e EC01      		movw r28,r24
+  64:ros_lib/time.cpp ****   sec = sec - 1 - rhs.sec;
+ 274               		.loc 1 64 0
+ 275 0110 8881      		ld r24,Y
+ 276 0112 9981      		ldd r25,Y+1
+ 277 0114 AA81      		ldd r26,Y+2
+ 278 0116 BB81      		ldd r27,Y+3
+ 279               	.LVL13:
+ 280 0118 0197      		sbiw r24,1
+ 281 011a A109      		sbc r26,__zero_reg__
+ 282 011c B109      		sbc r27,__zero_reg__
+ 283 011e FB01      		movw r30,r22
+ 284 0120 0081      		ld r16,Z
+ 285 0122 1181      		ldd r17,Z+1
+ 286 0124 2281      		ldd r18,Z+2
+ 287 0126 3381      		ldd r19,Z+3
+ 288 0128 801B      		sub r24,r16
+ 289 012a 910B      		sbc r25,r17
+ 290 012c A20B      		sbc r26,r18
+ 291 012e B30B      		sbc r27,r19
+ 292 0130 8883      		st Y,r24
+ 293 0132 9983      		std Y+1,r25
+ 294 0134 AA83      		std Y+2,r26
+ 295 0136 BB83      		std Y+3,r27
+  65:ros_lib/time.cpp ****   nsec = nsec + 1000000000UL - rhs.nsec;
+ 296               		.loc 1 65 0
+ 297 0138 8C81      		ldd r24,Y+4
+ 298 013a 9D81      		ldd r25,Y+5
+ 299 013c AE81      		ldd r26,Y+6
+ 300 013e BF81      		ldd r27,Y+7
+ 301 0140 9653      		subi r25,54
+ 302 0142 A546      		sbci r26,101
+ 303 0144 B44C      		sbci r27,-60
+ 304 0146 4481      		ldd r20,Z+4
+ 305 0148 5581      		ldd r21,Z+5
+ 306 014a 6681      		ldd r22,Z+6
+ 307 014c 7781      		ldd r23,Z+7
+ 308 014e 841B      		sub r24,r20
+ 309 0150 950B      		sbc r25,r21
+ 310 0152 A60B      		sbc r26,r22
+ 311 0154 B70B      		sbc r27,r23
+ 312 0156 8C83      		std Y+4,r24
+ 313 0158 9D83      		std Y+5,r25
+ 314 015a AE83      		std Y+6,r26
+ 315 015c BF83      		std Y+7,r27
+  66:ros_lib/time.cpp ****   normalizeSecNSec(sec, nsec);
+ 316               		.loc 1 66 0
+ 317 015e BE01      		movw r22,r28
+ 318               	.LVL14:
+ 319 0160 6C5F      		subi r22,-4
+ 320 0162 7F4F      		sbci r23,-1
+ 321 0164 CE01      		movw r24,r28
+ 322 0166 0E94 0000 		call _ZN3ros16normalizeSecNSecERmS0_
+ 323               	.LVL15:
+  67:ros_lib/time.cpp ****   return *this;
+  68:ros_lib/time.cpp **** }
+ 324               		.loc 1 68 0
+ 325 016a CE01      		movw r24,r28
+ 326               	/* epilogue start */
+ 327 016c DF91      		pop r29
+ 328 016e CF91      		pop r28
+ 329               	.LVL16:
+ 330 0170 1F91      		pop r17
+ 331 0172 0F91      		pop r16
+ 332 0174 0895      		ret
+ 333               		.cfi_endproc
+ 334               	.LFE22:
+ 336               	.global	_ZNK3ros4TimemiERKS0_
+ 338               	_ZNK3ros4TimemiERKS0_:
+ 339               	.LFB23:
+  69:ros_lib/time.cpp **** 
+  70:ros_lib/time.cpp **** Duration Time::operator-(const Time &rhs) const {
+ 340               		.loc 1 70 0
+ 341               		.cfi_startproc
+ 342               	.LVL17:
+ 343 0176 0F93      		push r16
+ 344               	.LCFI18:
+ 345               		.cfi_def_cfa_offset 3
+ 346               		.cfi_offset 16, -2
+ 347 0178 1F93      		push r17
+ 348               	.LCFI19:
+ 349               		.cfi_def_cfa_offset 4
+ 350               		.cfi_offset 17, -3
+ 351 017a CF93      		push r28
+ 352               	.LCFI20:
+ 353               		.cfi_def_cfa_offset 5
+ 354               		.cfi_offset 28, -4
+ 355 017c DF93      		push r29
+ 356               	.LCFI21:
+ 357               		.cfi_def_cfa_offset 6
+ 358               		.cfi_offset 29, -5
+ 359 017e CDB7      		in r28,__SP_L__
+ 360 0180 DEB7      		in r29,__SP_H__
+ 361               	.LCFI22:
+ 362               		.cfi_def_cfa_register 28
+ 363 0182 6097      		sbiw r28,16
+ 364               	.LCFI23:
+ 365               		.cfi_def_cfa_offset 22
+ 366 0184 0FB6      		in __tmp_reg__,__SREG__
+ 367 0186 F894      		cli
+ 368 0188 DEBF      		out __SP_H__,r29
+ 369 018a 0FBE      		out __SREG__,__tmp_reg__
+ 370 018c CDBF      		out __SP_L__,r28
+ 371               	/* prologue: function */
+ 372               	/* frame size = 16 */
+ 373               	/* stack size = 20 */
+ 374               	.L__stack_usage = 20
+ 375 018e FB01      		movw r30,r22
+  71:ros_lib/time.cpp ****   // Note: Considers wrap around as a continuation of time, e.g.,
+  72:ros_lib/time.cpp ****   // (0,0) - (0xFFFFFFFF, 0) = (1, 0)
+  73:ros_lib/time.cpp ****   Duration d;
+  74:ros_lib/time.cpp ****   d.sec = sec > rhs.sec ? sec - rhs.sec : -(rhs.sec - sec);
+ 376               		.loc 1 74 0
+ 377 0190 DC01      		movw r26,r24
+ 378 0192 4D91      		ld r20,X+
+ 379 0194 5D91      		ld r21,X+
+ 380 0196 6D91      		ld r22,X+
+ 381 0198 7C91      		ld r23,X
+ 382 019a 1397      		sbiw r26,3
+ 383 019c 0081      		ld r16,Z
+ 384 019e 1181      		ldd r17,Z+1
+ 385 01a0 2281      		ldd r18,Z+2
+ 386 01a2 3381      		ldd r19,Z+3
+ 387 01a4 401B      		sub r20,r16
+ 388 01a6 510B      		sbc r21,r17
+ 389 01a8 620B      		sbc r22,r18
+ 390 01aa 730B      		sbc r23,r19
+ 391 01ac 4987      		std Y+9,r20
+ 392 01ae 5A87      		std Y+10,r21
+ 393 01b0 6B87      		std Y+11,r22
+ 394 01b2 7C87      		std Y+12,r23
+  75:ros_lib/time.cpp ****   d.nsec = nsec > rhs.nsec ? nsec - rhs.nsec : -(rhs.nsec - nsec);
+ 395               		.loc 1 75 0
+ 396 01b4 1496      		adiw r26,4
+ 397 01b6 0D91      		ld r16,X+
+ 398 01b8 1D91      		ld r17,X+
+ 399 01ba 2D91      		ld r18,X+
+ 400 01bc 3C91      		ld r19,X
+ 401 01be 1797      		sbiw r26,4+3
+ 402 01c0 4481      		ldd r20,Z+4
+ 403 01c2 5581      		ldd r21,Z+5
+ 404 01c4 6681      		ldd r22,Z+6
+ 405 01c6 7781      		ldd r23,Z+7
+ 406 01c8 D901      		movw r26,r18
+ 407 01ca C801      		movw r24,r16
+ 408               	.LVL18:
+ 409 01cc 841B      		sub r24,r20
+ 410 01ce 950B      		sbc r25,r21
+ 411 01d0 A60B      		sbc r26,r22
+ 412 01d2 B70B      		sbc r27,r23
+ 413 01d4 8D87      		std Y+13,r24
+ 414 01d6 9E87      		std Y+14,r25
+ 415 01d8 AF87      		std Y+15,r26
+ 416 01da B88B      		std Y+16,r27
+  76:ros_lib/time.cpp ****   normalizeSecNSecSigned(d.sec, d.nsec);
+ 417               		.loc 1 76 0
+ 418 01dc BE01      		movw r22,r28
+ 419               	.LVL19:
+ 420 01de 635F      		subi r22,-13
+ 421 01e0 7F4F      		sbci r23,-1
+ 422 01e2 CE01      		movw r24,r28
+ 423 01e4 0996      		adiw r24,9
+ 424 01e6 0E94 0000 		call _ZN3ros22normalizeSecNSecSignedERlS0_
+ 425               	.LVL20:
+  77:ros_lib/time.cpp ****   return d;
+ 426               		.loc 1 77 0
+ 427 01ea 88E0      		ldi r24,lo8(8)
+ 428 01ec FE01      		movw r30,r28
+ 429 01ee 3996      		adiw r30,9
+ 430 01f0 DE01      		movw r26,r28
+ 431 01f2 1196      		adiw r26,1
+ 432               		0:
+ 433 01f4 0190      		ld r0,Z+
+ 434 01f6 0D92      		st X+,r0
+ 435 01f8 8A95      		dec r24
+ 436 01fa 01F4      		brne 0b
+ 437 01fc 2981      		ldd r18,Y+1
+ 438 01fe 3A81      		ldd r19,Y+2
+ 439 0200 4B81      		ldd r20,Y+3
+ 440 0202 5C81      		ldd r21,Y+4
+ 441 0204 6D81      		ldd r22,Y+5
+ 442 0206 7E81      		ldd r23,Y+6
+  78:ros_lib/time.cpp **** }
+ 443               		.loc 1 78 0
+ 444 0208 8F81      		ldd r24,Y+7
+ 445 020a 9885      		ldd r25,Y+8
+ 446               	/* epilogue start */
+ 447 020c 6096      		adiw r28,16
+ 448 020e 0FB6      		in __tmp_reg__,__SREG__
+ 449 0210 F894      		cli
+ 450 0212 DEBF      		out __SP_H__,r29
+ 451 0214 0FBE      		out __SREG__,__tmp_reg__
+ 452 0216 CDBF      		out __SP_L__,r28
+ 453 0218 DF91      		pop r29
+ 454 021a CF91      		pop r28
+ 455 021c 1F91      		pop r17
+ 456 021e 0F91      		pop r16
+ 457 0220 0895      		ret
+ 458               		.cfi_endproc
+ 459               	.LFE23:
+ 461               	.Letext0:
+ 462               		.file 2 "/usr/lib/avr/include/stdint.h"
+ 463               		.file 3 "./ros_lib/ros/duration.h"
+ 464               		.file 4 "ros_lib/ros/time.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 time.cpp
+     /tmp/ccdowwcb.s:2      *ABS*:0000003e __SP_H__
+     /tmp/ccdowwcb.s:3      *ABS*:0000003d __SP_L__
+     /tmp/ccdowwcb.s:4      *ABS*:0000003f __SREG__
+     /tmp/ccdowwcb.s:5      *ABS*:00000000 __tmp_reg__
+     /tmp/ccdowwcb.s:6      *ABS*:00000001 __zero_reg__
+     /tmp/ccdowwcb.s:12     .text:00000000 _ZN3ros16normalizeSecNSecERmS0_
+     /tmp/ccdowwcb.s:104    .text:0000005c _ZN3ros4Time8fromNSecEl
+     /tmp/ccdowwcb.s:158    .text:00000096 _ZN3ros4TimepLERKNS_8DurationE
+     /tmp/ccdowwcb.s:248    .text:00000106 _ZN3ros4TimemIERKNS_8DurationE
+     /tmp/ccdowwcb.s:338    .text:00000176 _ZNK3ros4TimemiERKS0_
+
+UNDEFINED SYMBOLS
+__udivmodsi4
+__divmodsi4
+_ZN3ros22normalizeSecNSecSignedERlS0_
