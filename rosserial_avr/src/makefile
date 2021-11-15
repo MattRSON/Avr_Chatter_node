@@ -126,11 +126,11 @@ CSTANDARD = -std=gnu99
 
 
 # Place -D or -U options here for C sources
-CDEFS = -DF_CPU=$(F_CPU)UL
+CDEFS = -D F_CPU=$(F_CPU)UL
 
 
 # Place -D or -U options here for C++ sources
-CPPDEFS = -DF_CPU=$(F_CPU)UL
+CPPDEFS = -D F_CPU=$(F_CPU)UL
 #CPPDEFS += -D__STDC_LIMIT_MACROS
 #CPPDEFS += -D__STDC_CONSTANT_MACROS
 
@@ -570,7 +570,6 @@ clean: begin clean_list end
 clean_list :
 	@echo
 	@echo $(MSG_CLEANING)
-	$(REMOVE) $(TARGET).hex
 	$(REMOVE) $(TARGET).eep
 	$(REMOVE) $(TARGET).cof
 	$(REMOVE) $(TARGET).elf
