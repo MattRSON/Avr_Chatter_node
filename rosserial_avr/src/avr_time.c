@@ -24,7 +24,7 @@ ISR (TIMER0_OVF_vect)
 void avr_time_init(void)
 {
 	// Prescale Timer 0 to devide by 64
-	TCCR0 |= (1<<CS01) | (1<<CS00);
+	TCCR0 |= (1<<CS01) | (1<<CS01);
 	// Enable Timer 0 overflow interrupt
 	TIMSK |= (1<<TOIE0);
 }
